@@ -1,5 +1,8 @@
 package fr.m2i.blog.view;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,19 +18,24 @@ public class MainView extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private AdminAuthentificationView adminAuthentificationView;
-	
+
 	private UserAuthentificationView userAuthentificationView;
 
 	public MainView() throws Exception {
 
-		JPanel content = new JPanel();
+		JPanel content = new JPanel(new BorderLayout());
 		this.add(content);
 
 		adminAuthentificationView = new AdminAuthentificationView();
 		userAuthentificationView = new UserAuthentificationView();
 
-		content.add(createPanelAdminAuthentification());
-		content.add(createPanelUserAuthentification());
+		JPanel header = new JPanel(new FlowLayout());
+
+		header.add(createPanelAdminAuthentification());
+		header.add(createPanelUserAuthentification());
+
+		content.add(header, BorderLayout.NORTH);
+		content.add(new BlogList(), BorderLayout.CENTER);
 
 		this.setTitle("Blog");
 		this.setSize(800, 500);
@@ -45,7 +53,7 @@ public class MainView extends JFrame {
 
 		return panel;
 	}
-	
+
 	public JPanel createPanelUserAuthentification() {
 		JPanel panel = new JPanel();
 
